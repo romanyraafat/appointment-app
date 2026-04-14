@@ -13,6 +13,7 @@ class DocApp extends StatelessWidget {
       designSize: Size(375, 812),
       minTextAdapt: true,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.appTheme,
         initialRoute: AppRoutes.onBoarding,
         onGenerateRoute: AppRouter.onGenerateRoute,
