@@ -18,12 +18,12 @@ class OnboardingFooter extends StatelessWidget {
             textAlign: TextAlign.center,
             "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.",
             maxLines: 2,
-            style: Styles.interRegulare10,
+            style: Styles.interRegulare10Grey,
           ),
           SizedBox(height: 20.h,),
           CustomElevatedButton(
             title: "Get Started",
-            style: Styles.interSemiBolde16,
+            style: Styles.interSemiBolde16White,
             onPressed: () {
               context.pushNamed(AppRoutes.login);
             },
