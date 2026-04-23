@@ -1,12 +1,14 @@
+import 'package:doc_doc_app/core/helper/extension.dart';
 import 'package:doc_doc_app/core/helper/spaceing.dart';
+import 'package:doc_doc_app/core/routing/app_routes.dart';
 import 'package:doc_doc_app/core/theme/app_colors.dart';
 import 'package:doc_doc_app/core/utils/styles.dart';
 import 'package:doc_doc_app/core/widgets/custom_elevated_button.dart';
 import 'package:doc_doc_app/features/login/data/models/login_request_body.dart';
 import 'package:doc_doc_app/features/login/logic/cubit/login_cubit.dart';
 import 'package:doc_doc_app/features/login/presentation/widgets/email_password.dart';
-import 'package:doc_doc_app/features/login/presentation/widgets/have_account.dart';
 import 'package:doc_doc_app/features/login/presentation/widgets/login_bloc_listner.dart';
+import 'package:doc_doc_app/features/login/presentation/widgets/not_account.dart';
 import 'package:doc_doc_app/features/login/presentation/widgets/terms_condition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,9 +62,11 @@ class Login extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Haveaccount(),
+                          NotAccount(),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.pushNamed(AppRoutes.signUp);
+                            },
                             child: Text(
                               "Sign Up",
                               style: Styles.interRegulare12Blue,

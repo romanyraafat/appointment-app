@@ -1,0 +1,39 @@
+import 'package:doc_doc_app/core/networking/api_result.dart';
+import 'package:doc_doc_app/features/sign_up/data/models/sign_up_request_body.dart';
+import 'package:doc_doc_app/features/sign_up/data/repos/sign_up_repo.dart';
+import 'package:doc_doc_app/features/sign_up/logic/cubit/sign_up_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class SignUpCubit extends Cubit<SignUpState> {
+  final SignUpRepo signUpRepo;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController =
+      TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  SignUpCubit(this.signUpRepo) : super(SignUpState.initial());
+  Future<void> signUp() async {
+    emit(SignUpState.loading());
+    var response = await signUpRepo.signUp(
+      signUpRequestBody: SignUpRequestBody(
+        name: nameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+        passwordConfirmation: passwordConfirmationController.text,
+        gender: 0,
+      ),
+    );
+    response.when(
+      success: (signUpRequestBody) {
+        emit(SignUpState.success(signUpRequestBody));
+      },
+      failure: (error) {
+        emit(SignUpState.failure(error: error.apiErrorModel.message));
+      },
+    );
+  }
+}
