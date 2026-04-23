@@ -2,27 +2,18 @@ import 'package:doc_doc_app/core/helper/spaceing.dart';
 import 'package:doc_doc_app/core/theme/app_colors.dart';
 import 'package:doc_doc_app/core/utils/styles.dart';
 import 'package:doc_doc_app/core/widgets/custom_elevated_button.dart';
-import 'package:doc_doc_app/core/widgets/custom_text_form_field.dart';
+import 'package:doc_doc_app/features/login/data/models/login_request_body.dart';
+import 'package:doc_doc_app/features/login/logic/cubit/login_cubit.dart';
+import 'package:doc_doc_app/features/login/presentation/widgets/email_password.dart';
+import 'package:doc_doc_app/features/login/presentation/widgets/have_account.dart';
+import 'package:doc_doc_app/features/login/presentation/widgets/login_bloc_listner.dart';
+import 'package:doc_doc_app/features/login/presentation/widgets/terms_condition.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  late TextEditingController email;
-  late TextEditingController password;
-  final GlobalKey formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    email = TextEditingController();
-    password = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,61 +35,43 @@ class _LoginState extends State<Login> {
                     style: Styles.interRegulare14Grey,
                   ),
                   verticalSpacing(20),
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          controller: email,
-                          hintText: "email",
-                          align: true,
+                  Column(
+                    children: [
+                      EmailPassword(),
+                      verticalSpacing(30),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forget Password?",
+                          style: Styles.interRegulare12Blue,
                         ),
-                        verticalSpacing(30),
-                        CustomTextFormField(
-                          controller: password,
-                          hintText: "password",
-                          align: true,
-                          isPassword: true,
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Forget Password?",
-                            style: Styles.interRegulare12Blue,
+                      ),
+                      verticalSpacing(20),
+                      CustomElevatedButton(
+                        title: "Login",
+                        style: Styles.interSemiBolde16White,
+                        onPressed: () {
+                          validateThenDoLogin(context);
+                        },
+                      ),
+                      verticalSpacing(30),
+                      TermsConditions(),
+                      verticalSpacing(9),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Haveaccount(),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Sign Up",
+                              style: Styles.interRegulare12Blue,
+                            ),
                           ),
-                        ),
-                        verticalSpacing(20),
-                        CustomElevatedButton(
-                          title: "Login",
-                          style: Styles.interSemiBolde16White,
-                          onPressed: () {},
-                        ),
-                        verticalSpacing(30),
-                        Text(
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          "By logging, you agree to our  Terms & Conditions and PrivacyPolicy.",
-                          style: Styles.interRegulare14Grey,
-                        ),
-                         verticalSpacing(9),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Already have an account yet",
-                              style: Styles.interRegulare14Grey,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Sign Up",
-                                style: Styles.interRegulare12Blue,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          LoginBlocListner(),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -107,5 +80,16 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().login(
+        loginRequestBody: LoginRequestBody(
+          email: context.read<LoginCubit>().email.text,
+          password: context.read<LoginCubit>().password.text,
+        ),
+      );
+    }
   }
 }

@@ -15,9 +15,9 @@ class CustomTextFormField extends StatefulWidget {
   final bool? align;
   final bool? isEnabled;
   final Color? fillColor;
-  final String? Function(String?)? validator;
+  final  Function(String?)? validator;
 
-  const CustomTextFormField( {
+  const CustomTextFormField({
     this.hintColor,
     super.key,
     required this.controller,
@@ -26,7 +26,11 @@ class CustomTextFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.prefixIcon,
     this.validator,
-    this.align = false, this.hintStyle, this.fillColor, this.isEnabled, this.maxLines,
+    this.align = false,
+    this.hintStyle,
+    this.fillColor,
+    this.isEnabled,
+    this.maxLines,
   });
 
   @override
@@ -45,23 +49,22 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
       child: TextFormField(
-        
         maxLines: widget.maxLines ?? 1,
         textAlign: widget.align == true ? TextAlign.start : TextAlign.end,
         controller: widget.controller,
         obscureText: isObscure,
         keyboardType: widget.keyboardType,
-        validator: widget.validator,
+        validator: (value) {
+          return widget.validator!(value);
+        },
+        // validator: widget.validator,
         decoration: InputDecoration(
           hintText: widget.hintText,
-          hintStyle: widget.hintStyle ?? GoogleFonts.cairo(
-            fontSize: 17.sp,
-            color: AppColors.hintColor ,
-          ),
+          hintStyle:
+              widget.hintStyle ??
+              GoogleFonts.cairo(fontSize: 17.sp, color: AppColors.hintColor),
           prefixIconColor: AppColors.hintColor,
           suffixIcon: widget.isPassword
               ? GestureDetector(
@@ -71,7 +74,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     });
                   },
                   child: Icon(
-                    isObscure ?   Icons.visibility_off : Icons.visibility,
+                    isObscure ? Icons.visibility_off : Icons.visibility,
                   ),
                 )
               : widget.prefixIcon != null
@@ -80,13 +83,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.r)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
-            borderSide:  BorderSide(
-              color: AppColors.primaryColorBlue,
-            ),
+            borderSide: BorderSide(color: AppColors.primaryColorBlue),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
-            borderSide:  BorderSide(color:AppColors.greyBorderColor),
+            borderSide: BorderSide(color: AppColors.greyBorderColor),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
