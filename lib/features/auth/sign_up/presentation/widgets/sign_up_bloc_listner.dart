@@ -2,8 +2,8 @@ import 'package:doc_doc_app/core/helper/extension.dart';
 import 'package:doc_doc_app/core/routing/app_routes.dart';
 import 'package:doc_doc_app/core/theme/app_colors.dart';
 import 'package:doc_doc_app/core/utils/styles.dart';
-import 'package:doc_doc_app/features/sign_up/logic/cubit/sign_up_cubit.dart';
-import 'package:doc_doc_app/features/sign_up/logic/cubit/sign_up_state.dart';
+import 'package:doc_doc_app/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:doc_doc_app/features/auth/sign_up/logic/cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

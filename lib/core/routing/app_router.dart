@@ -4,8 +4,8 @@ import 'package:doc_doc_app/features/home/presentation/views/home_view.dart';
 import 'package:doc_doc_app/features/login/logic/cubit/login_cubit.dart';
 import 'package:doc_doc_app/features/login/presentation/views/login.dart';
 import 'package:doc_doc_app/features/onboarding/presentation/views/on_boarding.dart';
-import 'package:doc_doc_app/features/sign_up/logic/cubit/sign_up_cubit.dart';
-import 'package:doc_doc_app/features/sign_up/presentation/views/sign_up.dart';
+import 'package:doc_doc_app/features/auth/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:doc_doc_app/features/auth/sign_up/presentation/views/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

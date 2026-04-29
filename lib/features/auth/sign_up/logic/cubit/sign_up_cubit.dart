@@ -1,7 +1,7 @@
 import 'package:doc_doc_app/core/networking/api_result.dart';
-import 'package:doc_doc_app/features/sign_up/data/models/sign_up_request_body.dart';
-import 'package:doc_doc_app/features/sign_up/data/repos/sign_up_repo.dart';
-import 'package:doc_doc_app/features/sign_up/logic/cubit/sign_up_state.dart';
+import 'package:doc_doc_app/features/auth/sign_up/data/models/sign_up_request_body.dart';
+import 'package:doc_doc_app/features/auth/sign_up/data/repos/sign_up_repo.dart';
+import 'package:doc_doc_app/features/auth/sign_up/logic/cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

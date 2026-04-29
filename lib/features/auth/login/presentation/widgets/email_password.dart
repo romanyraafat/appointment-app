@@ -1,8 +1,8 @@
 import 'package:doc_doc_app/core/helper/app_regex.dart';
 import 'package:doc_doc_app/core/helper/spaceing.dart';
 import 'package:doc_doc_app/core/widgets/custom_text_form_field.dart';
+import 'package:doc_doc_app/features/auth/login/presentation/widgets/password_vallidation.dart';
 import 'package:doc_doc_app/features/login/logic/cubit/login_cubit.dart';
-import 'package:doc_doc_app/features/login/presentation/widgets/password_vallidation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
